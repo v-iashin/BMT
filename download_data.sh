@@ -1,0 +1,46 @@
+echo "Downloading i3d features"
+cd data/
+wget https://a3s.fi/swift/v1/AUTH_a235c0f452d648828f745589cde1219a/bmt/i3d_25fps_stack64step64_2stream_npy.zip -q --show-progress
+echo "Downloading vggish features"
+wget https://a3s.fi/swift/v1/AUTH_a235c0f452d648828f745589cde1219a/bmt/vggish_npy.zip -q --show-progress
+cd ../
+
+echo "Downloading GloVe embeddings"
+mkdir .vector_cache
+cd .vector_cache
+wget https://a3s.fi/swift/v1/AUTH_a235c0f452d648828f745589cde1219a/bmt/glove.840B.300d.zip  -q --show-progress
+cd ../
+
+echo "Checking for correctness of the downloaded files"
+
+i3d_md5=($(md5sum ./data/i3d_25fps_stack64step64_2stream_npy.zip))
+if [ "$i3d_md5" == "d7266e440f8c616acbc0d8aaa4a336dc" ]; then
+    echo "OK: i3d features"
+else
+    echo "ERROR: .zip file with i3d features is corrupted"
+    exit 1
+fi
+
+vggish_md5=($(md5sum ./data/vggish_npy.zip))
+if [ "$vggish_md5" == "9a654ad785e801aceb70af2a5e1cffbe" ]; then
+    echo "OK: vggish features"
+else
+    echo "ERROR: .zip file with vggish features is corrupted"
+    exit 1
+fi
+
+glove_md5=($(md5sum ./.vector_cache/glove.840B.300d.zip))
+if [ "$glove_md5" == "2ffafcc9f9ae46fc8c95f32372976137" ]; then
+    echo "OK: glove embeddings"
+else
+    echo "ERROR: .zip file with glove embeddings is corrupted"
+    exit 1
+fi
+
+echo "Unpacking i3d (~1 min)"
+cd ./data
+unzip -q i3d_25fps_stack64step64_2stream_npy.zip
+echo "Unpacking vggish features"
+unzip -q vggish_npy.zip
+
+echo "Done"
