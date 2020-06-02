@@ -2,6 +2,7 @@ name: bmt
 channels:
   - pytorch
   - conda-forge
+  - anaconda
   - defaults
 dependencies:
   - _libgcc_mutex=0.1=main
@@ -40,6 +41,7 @@ dependencies:
   - ninja=1.9.0=py37hfd86e86_0
   - numpy=1.15.4=py37h7e9f1db_0
   - numpy-base=1.15.4=py37hde5b4d6_0
+  - openjdk=8.0.152=h7b6447c_3
   - openssl=1.1.1g=h7b6447c_0
   - pandas=0.24.2=py37he6710b0_0
   - pip=20.0.2=py37_1
@@ -77,6 +79,5 @@ dependencies:
   - xz=5.2.5=h7b6447c_0
   - zlib=1.2.11=h7b6447c_3
   - pip:
-    - en-core-web-sm==2.0.0
     - torchtext==0.3.1
 
