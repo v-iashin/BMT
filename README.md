@@ -48,7 +48,7 @@ python main.py \
     --B 32
 ```
 
-- *Train proposal generation module*. If you need a pre-trained proposal generation model, please let me know in Issues.
+- *Train proposal generation module*. You may also download the pre-trained model [best_prop_model.pt](https://a3s.fi/swift/v1/AUTH_a235c0f452d648828f745589cde1219a/bmt/best_prop_model.pt) (`md5 hash 5f8b20826b09eadd41b7a5be662c198b`)
 ```bash
 python main.py \
     --procedure train_prop \
