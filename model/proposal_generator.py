@@ -121,9 +121,8 @@ class ProposalGenerator(nn.Module):
 
     def kernel_size_forward(self, x, layer, stride, targets):
         # in case targets is None
-        loss = None
-        losses = None
-        metrics_dict = None
+        loss = 0
+        losses = {}
         x = layer(x)
 
         B, S, D = x.shape
@@ -273,9 +272,8 @@ class MultimodalProposalGenerator(nn.Module):
     def forward_modality(self, x, targets, detection, stride, anchors_list):
         anchors_num = len(anchors_list)
         # in case targets is None
-        loss = None
-        losses = None
-        metrics_dict = None
+        loss = 0
+        losses = {}
 
         x = detection(x)
 
@@ -390,7 +388,7 @@ class MultimodalProposalGenerator(nn.Module):
 
 def make_targets(predictions, targets, anchors, stride):
     '''
-        The implementation relies on implementation of YOLOv3 for object detection
+        The implementation relies on YOLOv3 for object detection
             - https://github.com/eriklindernoren/PyTorch-YOLOv3/blob/master/models.py
             - https://github.com/v-iashin/PersonalProjects/blob/master/detector/darknet.py
     '''

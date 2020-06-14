@@ -160,6 +160,17 @@ def trim_proposals(model_output, duration_in_secs):
     model_output[:, :, 1] = model_output[:, :, 1].min(duration_in_secs)
     return model_output
 
+def remove_very_short_segments(model_output, shortest_segment_prior):
+    model_output = model_output
+    # (1, A*S) <-
+    lengths = model_output[:, :, 1] - model_output[:, :, 0]
+    # (A*S) <-
+    lengths.squeeze_()
+    # (A*S)
+    model_output = model_output[:, lengths > shortest_segment_prior, :]
+
+    return model_output
+
 
 def non_max_suppresion(video_preds, tIoU_threshold):
     '''video_preds (AS, num_features)'''
@@ -180,7 +191,6 @@ def non_max_suppresion(video_preds, tIoU_threshold):
     # (new_N, D) <- a list of (1, num_feats)
     model_output = torch.cat(model_output_after_nms)
     return model_output
-
 
 def postprocess_preds(model_output, cfg, batch):
     '''
