@@ -1,3 +1,6 @@
 [submodule "submodules/pycocoevalcap"]
 	path = submodules/pycocoevalcap
 	url = https://github.com/salaniz/pycocoevalcap.git
+[submodule "submodules/video_features"]
+	path = submodules/video_features
+	url = https://github.com/v-iashin/video_features.git
