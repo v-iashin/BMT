@@ -114,7 +114,7 @@ def load_prop_model(
 
     return cfg, model
 
-def load_cap_model(pretrained_cap_model_path: str, device: int, max_prop_per_vid: int) -> tuple:
+def load_cap_model(pretrained_cap_model_path: str, device: int) -> tuple:
     '''Loads captioning model along with the Config used to train it and initiates training dataset
        to build the vocabulary including special tokens.
 
@@ -162,19 +162,22 @@ def generate_proposals(
     Returns:
         torch.Tensor: tensor of size (batch=1, num_props, 3) with predicted proposals.
     '''
-
+    # load features
     feature_stacks = load_features_from_npy(
         feature_paths, None, None, duration_in_secs, pad_idx, device, get_full_feat=True, 
         pad_feats_up_to=cfg.pad_feats_up_to
     )
 
+    # form input batch
     batch = {
         'feature_stacks': feature_stacks,
         'duration_in_secs': duration_in_secs
     }
 
     with torch.no_grad():
+        # masking out padding in the input features
         masks = make_masks(batch['feature_stacks'], None, cfg.modality, pad_idx)
+        # inference call
         predictions, _, _, _ = prop_model(batch['feature_stacks'], None, masks)
         # (center, length) -> (start, end)
         predictions = get_corner_coords(predictions)
@@ -273,9 +276,7 @@ if __name__ == "__main__":
     }
 
     # Loading models and other essential stuff
-    cap_cfg, cap_model, train_dataset = load_cap_model(
-        args.pretrained_cap_model_path, args.device_id, args.max_prop_per_vid
-    )
+    cap_cfg, cap_model, train_dataset = load_cap_model(args.pretrained_cap_model_path, args.device_id)
     prop_cfg, prop_model = load_prop_model(
         args.device_id, args.prop_generator_model_path, args.pretrained_cap_model_path, args.max_prop_per_vid
     )

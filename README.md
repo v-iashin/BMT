@@ -19,7 +19,7 @@ Then, the input features are trimmed according to the proposed segments and enco
 <!-- <img src="https://github.com/v-iashin/v-iashin.github.io/raw/master/images/bmt/proposal_generator_compressed.svg" alt="Bi-Modal Transformer with Proposal Generator" height="400"> -->
 
 ## Getting Started
-Clone the repository. Mind the `--recursive` flag to make sure `submodules` are also cloned (evaluation scripts for Python 3).
+Clone the repository. Mind the `--recursive` flag to make sure `submodules` are also cloned (evaluation scripts for Python 3 and scripts for feature extraction).
 ```bash
 git clone --recursive https://github.com/v-iashin/BMT.git
 ```
@@ -101,40 +101,43 @@ Comparison between [MDVC](https://arxiv.org/abs/2003.07758) and Bi-modal Transfo
 
 *Disclaimer: we do not guarantee perfect results nor recommend you to use it in production. Sometimes captions are redundant, unnatural, and rediculous. Use it at your own risk.*
 
-Start with feature extraction using [video_features](https://github.com/v-iashin/video_features) repository. Extract I3D features
+Start by extracting audio and visual features from your video using [video_features](https://github.com/v-iashin/video_features/tree/4fa02bd5c5b8c34081dcfb609e2bcd5a973eaab2) repository. This repo is also included in `./submodules/video_features` (commit `4fa02bd5c5b8c34081dcfb609e2bcd5a973eaab2`).
+
+Extract I3D features
 ```bash
-# run this from video_features folder
+# run this from the video_features folder: `cd ./submodules/video_features`
 conda activate i3d
 python main.py \
     --feature_type i3d \
     --on_extraction save_numpy \
     --device_ids 0 \
     --extraction_fps 25 \
-    --stack_size 24 \
-    --step_size 24 \
-    --video_paths ../BMT/sample/women_long_jump.mp4
+    --video_paths ../../sample/women_long_jump.mp4 \
+    --output_path ../../sample/
 ```
 
-Extract VGGish features
+Extract VGGish features (if `ValueError`, download the vggish model first--see `README.md` in `./submodules/video_features`)
 ```bash
-# run this from video_features folder
+# run this from the video_features folder: `cd ./submodules/video_features`
 conda activate vggish
 python main.py \
     --feature_type vggish \
     --on_extraction save_numpy \
     --device_ids 0 \
-    --video_paths ../BMT/sample/women_long_jump.mp4
+    --video_paths ../../sample/women_long_jump.mp4 \
+    --output_path ../../sample/
 ```
 
 Run the inference
 ```bash
+# run this from the BMT main folder: `cd ../../`
 conda activate bmt
 python ./sample/single_video_prediction.py \
     --prop_generator_model_path ./sample/best_prop_model.pt \
     --pretrained_cap_model_path ./sample/best_cap_model.pt \
-    --vggish_features_path ../video_features/output/women_long_jump_vggish.npy \
-    --rgb_features_path ../video_features/output/women_long_jump_rgb.npy \
-    --flow_features_path ../video_features/output/women_long_jump_flow.npy \
+    --vggish_features_path ./sample/women_long_jump_vggish.npy \
+    --rgb_features_path ./sample/women_long_jump_rgb.npy \
+    --flow_features_path ./sample/women_long_jump_flow.npy \
     --duration_in_secs 35.155 \
     --device_id 0 \
     --max_prop_per_vid 100 \
@@ -144,13 +147,14 @@ python ./sample/single_video_prediction.py \
 Expected output
 ```
 [
-  {'start': 0.0, 'end': 4.9, 'sentence': 'We see the closing title screen'}, 
-  {'start': 2.7, 'end': 29.0, 'sentence': 'A woman is seen running down a track and down a track while others watch on the sides'}, 
-  {'start': 19.6, 'end': 33.3, 'sentence': 'The man runs down the track and jumps into a sand pit'}, 
-  {'start': 0.0, 'end': 13.0, 'sentence': 'A man is seen running down a track and leads into a large group of people running around a track'}, 
-  {'start': 0.9, 'end': 2.5, 'sentence': 'We see a title screen'}, 
-  {'start': 0.0, 'end': 1.6, 'sentence': 'A man is seen sitting on a table with a white words on the screen'}, 
-  {'start': 30.0, 'end': 35.2, 'sentence': 'The man runs down the track and lands on the sand'}
+  {'start': 0.1, 'end': 4.9, 'sentence': 'We see a title screen'}, 
+  {'start': 5.0, 'end': 7.9, 'sentence': 'A large group of people are seen standing around a building'}, 
+  {'start': 0.7, 'end': 11.9, 'sentence': 'A man is seen standing in front of a large crowd'}, 
+  {'start': 19.6, 'end': 33.3, 'sentence': 'The woman runs down a track and jumps into a sand pit'}, 
+  {'start': 7.5, 'end': 10.0, 'sentence': 'A large group of people are seen standing around a building'}, 
+  {'start': 0.6, 'end': 35.1, 'sentence': 'A large group of people are seen running down a track while others watch on the sides'}, 
+  {'start': 8.2, 'end': 13.7, 'sentence': 'A man runs down a track'}, 
+  {'start': 0.1, 'end': 2.0, 'sentence': 'We see a title screen'}
 ]
 ```
 
