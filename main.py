@@ -55,8 +55,7 @@ if __name__ == "__main__":
     ## TRAINING
     parser.add_argument('--procedure', type=str, required=True, 
                         choices=['train_cap', 'train_prop', 'evaluate'])
-    parser.add_argument('--device_ids', type=int, nargs='+', required=True, 
-                        help='separated by a whitespace')
+    parser.add_argument('--device_ids', type=int, nargs='+', default=[0], help='separated by a whitespace')
     parser.add_argument('--start_token', type=str, default='<s>', help='starting token')
     parser.add_argument('--end_token', type=str, default='</s>', help='ending token')
     parser.add_argument('--pad_token', type=str, default='<blank>', help='padding token')
