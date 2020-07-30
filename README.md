@@ -2,17 +2,28 @@
 # Dense Video Captioning with Bi-modal Transformer
 [Project Page](https://v-iashin.github.io/bmt) • [Paper](https://arxiv.org/abs/2005.08271)
 
-This is a PyTorch implementation for our paper: A Better Use of Audio-Visual Cues: Dense Video Captioning with Bi-modal Transformer.
+This is a PyTorch implementation for our paper: A Better Use of Audio-Visual Cues: Dense Video Captioning with Bi-modal Transformer ([BMVC](https://bmvc2020.github.io/) 2020).
+
+- [Dense Video Captioning with Bi-modal Transformer](#dense-video-captioning-with-bi-modal-transformer)
+  - [Summary](#summary)
+  - [Getting Started](#getting-started)
+  - [Train](#train)
+  - [Evaluate](#evaluate)
+  - [Details on Feature Extraction](#details-on-feature-extraction)
+  - [Reproducibility Note](#reproducibility-note)
+  - [Comparison with MDVC](#comparison-with-mdvc)
+  - [Single Video Prediction](#single-video-prediction)
+  - [Citation](#citation)
 
 ## Summary
 
-Dense video captioning aims to localize and describe important events in untrimmed videos. Existing methods mainly tackle this task by exploiting the visual information alone, while completely neglecting the audio track. 
+Dense video captioning aims to localize and describe important events in untrimmed videos. Existing methods mainly tackle this task by exploiting the visual information alone, while completely neglecting the audio track.
 
 To this end, we present *Bi-modal Transformer with Proposal Generator* (BMT), which efficiently utilizes audio and visual input sequences to select events in a video and, then, use these clips to generate a textual description.
 
 <img src="https://github.com/v-iashin/v-iashin.github.io/raw/master/images/bmt/bi_modal_transformer.svg" alt="Bi-Modal Transformer with Proposal Generator" width="900">
 
-Audio and visual features are encoded with [*VGGish*](https://github.com/tensorflow/models/tree/0b3a8abf095cb8866ca74c2e118c1894c0e6f947/research/audioset/vggish) and [*I3D*](https://github.com/hassony2/kinetics_i3d_pytorch/tree/51240948f9ae92808c390e7217041d6fd89414e9) while caption tokens with [*GloVe*](https://torchtext.readthedocs.io/en/latest/vocab.html#glove). First, VGGish and I3D features are passed through the stack of *N* bi-modal encoder layers where audio and visual sequences are encoded to, what we call, audio-attended visual and video-attended audio features. These features are passed to the bi-modal multi-headed proposal generator, which generates a set of proposals using information from both modalities. 
+Audio and visual features are encoded with [*VGGish*](https://github.com/tensorflow/models/tree/0b3a8abf095cb8866ca74c2e118c1894c0e6f947/research/audioset/vggish) and [*I3D*](https://github.com/hassony2/kinetics_i3d_pytorch/tree/51240948f9ae92808c390e7217041d6fd89414e9) while caption tokens with [*GloVe*](https://torchtext.readthedocs.io/en/latest/vocab.html#glove). First, VGGish and I3D features are passed through the stack of *N* bi-modal encoder layers where audio and visual sequences are encoded to, what we call, audio-attended visual and video-attended audio features. These features are passed to the bi-modal multi-headed proposal generator, which generates a set of proposals using information from both modalities.
 
 Then, the input features are trimmed according to the proposed segments and encoded in the bi-modal encoder again. The stack of *N* bi-modal decoder layers inputs both: a) GloVe embeddings of the previously generated caption sequence, b) the internal representation from the last layer of the encoder for both modalities. The decoder produces its internal representation which is, then, used in the generator model the distribution over the vocabulary for the caption next word.
 
@@ -85,7 +96,7 @@ Check out our script for extraction of I3D and VGGish features from a set of vid
 
 ## Reproducibility Note
 
-We would like to note that, despite a fixed random seed, some randomness occurs in our experimentation. Therefore, during the training of the captioning module, one might achieve slightly different results. Specifically, the numbers in your case might differ (higher or lower) from ours or the model will saturate in a different number of epochs. At the same time, we observed quite consistent results when training the proposal generation module with the pre-trained captioning module. 
+We would like to note that, despite a fixed random seed, some randomness occurs in our experimentation. Therefore, during the training of the captioning module, one might achieve slightly different results. Specifically, the numbers in your case might differ (higher or lower) from ours or the model will saturate in a different number of epochs. At the same time, we observed quite consistent results when training the proposal generation module with the pre-trained captioning module.
 
 We relate this problem to padding and how it is implemented in PyTorch. (see [PyTorch Reproducibility](https://pytorch.org/docs/1.2.0/notes/randomness.html#pytorch) for details). Also, any suggestions on how to address this issue are greatly appreciated.
 
@@ -147,33 +158,32 @@ python ./sample/single_video_prediction.py \
 Expected output
 ```
 [
-  {'start': 0.1, 'end': 4.9, 'sentence': 'We see a title screen'}, 
-  {'start': 5.0, 'end': 7.9, 'sentence': 'A large group of people are seen standing around a building'}, 
-  {'start': 0.7, 'end': 11.9, 'sentence': 'A man is seen standing in front of a large crowd'}, 
-  {'start': 19.6, 'end': 33.3, 'sentence': 'The woman runs down a track and jumps into a sand pit'}, 
-  {'start': 7.5, 'end': 10.0, 'sentence': 'A large group of people are seen standing around a building'}, 
-  {'start': 0.6, 'end': 35.1, 'sentence': 'A large group of people are seen running down a track while others watch on the sides'}, 
-  {'start': 8.2, 'end': 13.7, 'sentence': 'A man runs down a track'}, 
+  {'start': 0.1, 'end': 4.9, 'sentence': 'We see a title screen'},
+  {'start': 5.0, 'end': 7.9, 'sentence': 'A large group of people are seen standing around a building'},
+  {'start': 0.7, 'end': 11.9, 'sentence': 'A man is seen standing in front of a large crowd'},
+  {'start': 19.6, 'end': 33.3, 'sentence': 'The woman runs down a track and jumps into a sand pit'},
+  {'start': 7.5, 'end': 10.0, 'sentence': 'A large group of people are seen standing around a building'},
+  {'start': 0.6, 'end': 35.1, 'sentence': 'A large group of people are seen running down a track while others watch on the sides'},
+  {'start': 8.2, 'end': 13.7, 'sentence': 'A man runs down a track'},
   {'start': 0.1, 'end': 2.0, 'sentence': 'We see a title screen'}
 ]
 ```
 
-Note that in our research we avoided non-maximum suppression for computational efficiency and to allow the event prediction to be dense. Feel free to play with `--nms_tiou_thresh` parameter: for example, try to make it `0.4` as in the provided example. 
+Note that in our research we avoided non-maximum suppression for computational efficiency and to allow the event prediction to be dense. Feel free to play with `--nms_tiou_thresh` parameter: for example, try to make it `0.4` as in the provided example.
 
 The sample video credits: [Women's long jump historical World record in 1978](https://www.youtube.com/watch?v=nynA-Gmh2r8)
 
 ## Citation
-Please, use this bibtex if you would like to cite our work
+Our paper was accepted at BMVC 2020. Please, use this bibtex if you would like to cite our work
 ```
-@misc{BMT_Iashin_2020,
+@InProceedings{BMT_Iashin_2020,
   title={A Better Use of Audio-Visual Cues: Dense Video Captioning with Bi-modal Transformer},
-  author={Vladimir Iashin and Esa Rahtu},
-  year={2020},
-  eprint={2005.08271},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV}
+  author={Iashin, Vladimir and Rahtu, Esa},
+  booktitle={British Machine Vision Conference (BMVC)},
+  year={2020}
 }
 ```
+
 ```
 @InProceedings{MDVC_Iashin_2020,
   author = {Iashin, Vladimir and Rahtu, Esa},
