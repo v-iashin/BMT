@@ -1,6 +1,6 @@
 
 # Dense Video Captioning with Bi-modal Transformer
-[Project Page](https://v-iashin.github.io/bmt) • [Paper](https://arxiv.org/abs/2005.08271)
+[Project Page](https://v-iashin.github.io/bmt) • [ArXiv](https://arxiv.org/abs/2005.08271) • Proceedings (coming soon) • Presentation (coming soon)
 
 This is a PyTorch implementation for our paper: A Better Use of Audio-Visual Cues: Dense Video Captioning with Bi-modal Transformer ([BMVC](https://bmvc2020.github.io/) 2020).
 
@@ -14,6 +14,7 @@ This is a PyTorch implementation for our paper: A Better Use of Audio-Visual Cue
   - [Comparison with MDVC](#comparison-with-mdvc)
   - [Single Video Prediction](#single-video-prediction)
   - [Citation](#citation)
+  - [Acknowledgments](#acknowledgments)
 
 ## Summary
 
@@ -187,8 +188,11 @@ Our paper was accepted at BMVC 2020. Please, use this bibtex if you would like t
 ```
 @InProceedings{MDVC_Iashin_2020,
   author = {Iashin, Vladimir and Rahtu, Esa},
-  title = {Multi-modal Dense Video Captioning},
-  booktitle = {Workshop on Multimodal Learning (CVPR Workshop)},
+  title = {Multi-Modal Dense Video Captioning},
+  booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
   year = {2020}
 }
 ```
+
+## Acknowledgments
+Funding for this research was provided by the Academy of Finland projects 327910 & 324346. The authors acknowledge CSC — IT Center for Science, Finland, for computational resources for our experimentation.
