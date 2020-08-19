@@ -15,6 +15,7 @@ This is a PyTorch implementation for our paper: A Better Use of Audio-Visual Cue
   - [Single Video Prediction](#single-video-prediction)
   - [Citation](#citation)
   - [Acknowledgments](#acknowledgments)
+  - [Media Coverage](#media-coverage)
 
 ## Summary
 
@@ -196,3 +197,6 @@ Our paper was accepted at BMVC 2020. Please, use this bibtex if you would like t
 
 ## Acknowledgments
 Funding for this research was provided by the Academy of Finland projects 327910 & 324346. The authors acknowledge CSC — IT Center for Science, Finland, for computational resources for our experimentation.
+
+## Media Coverage
+- [Dense Video Captioning Using Pytorch](https://towardsdatascience.com/dense-video-captioning-using-pytorch-392ca0d6971a)
