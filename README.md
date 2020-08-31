@@ -1,6 +1,6 @@
 
 # Dense Video Captioning with Bi-modal Transformer
-[Project Page](https://v-iashin.github.io/bmt) • [ArXiv](https://arxiv.org/abs/2005.08271) • Proceedings (coming soon) • Presentation (coming soon)
+[Project Page](https://v-iashin.github.io/bmt) • [ArXiv](https://arxiv.org/abs/2005.08271) • Proceedings (coming soon) • [Presentation](https://www.youtube.com/watch?v=C4zYVIqGDVQ) ([Can't watch YouTube? I gotchu!](https://a3s.fi/swift/v1/AUTH_a235c0f452d648828f745589cde1219a/bmt/video_0111.mp4) 🤗)
 
 This is a PyTorch implementation for our paper: A Better Use of Audio-Visual Cues: Dense Video Captioning with Bi-modal Transformer ([BMVC](https://bmvc2020.github.io/) 2020).
 
@@ -191,6 +191,7 @@ Our paper was accepted at BMVC 2020. Please, use this bibtex if you would like t
   author = {Iashin, Vladimir and Rahtu, Esa},
   title = {Multi-Modal Dense Video Captioning},
   booktitle = {The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+  pages={958--959},
   year = {2020}
 }
 ```
@@ -199,4 +200,4 @@ Our paper was accepted at BMVC 2020. Please, use this bibtex if you would like t
 Funding for this research was provided by the Academy of Finland projects 327910 & 324346. The authors acknowledge CSC — IT Center for Science, Finland, for computational resources for our experimentation.
 
 ## Media Coverage
-- [Dense Video Captioning Using Pytorch](https://towardsdatascience.com/dense-video-captioning-using-pytorch-392ca0d6971a)
+- [Dense Video Captioning Using Pytorch (Towards Data Science)](https://towardsdatascience.com/dense-video-captioning-using-pytorch-392ca0d6971a)
