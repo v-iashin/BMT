@@ -2,11 +2,6 @@
 # Dense Video Captioning with Bi-modal Transformer
 [Project Page](https://v-iashin.github.io/bmt) • [ArXiv](https://arxiv.org/abs/2005.08271) • [BMVC Page](https://www.bmvc2020-conference.com/conference/papers/paper_0111.html) • [Presentation](https://www.youtube.com/watch?v=C4zYVIqGDVQ) ([Can't watch YouTube? I gotchu!](https://a3s.fi/swift/v1/AUTH_a235c0f452d648828f745589cde1219a/bmt/video_0111.mp4) 🤗)
 
----
-
-**Join us at BMVC 2020 during this week, on Thursday, 11th (Afternoon) 🙂. Also, check out our [BMVC paper page and video presentation](https://www.bmvc2020-conference.com/conference/papers/paper_0111.html) even if you are not attending 😉.**
-
----
 
 This is a PyTorch implementation for our paper: A Better Use of Audio-Visual Cues: Dense Video Captioning with Bi-modal Transformer ([BMVC](https://bmvc2020.github.io/) 2020).
 
