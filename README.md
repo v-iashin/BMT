@@ -94,7 +94,7 @@ python main.py \
 
 
 ## Details on Feature Extraction
-Check out our script for extraction of I3D and VGGish features from a set of videos: [video_features on GitHub](https://github.com/v-iashin/video_features). Also see [#7](https://github.com/v-iashin/MDVC/issues/7) for more details on configuration.
+Check out our script for extraction of I3D and VGGish features from a set of videos: [video_features on GitHub](https://github.com/v-iashin/video_features/tree/4fa02bd5c5b8c34081dcfb609e2bcd5a973eaab2) (make sure to checkout to `4fa02bd5c5b8c34081dcfb609e2bcd5a973eaab2` commit). Also see [#7](https://github.com/v-iashin/MDVC/issues/7) for more details on configuration.
 
 
 ## Reproducibility Note
