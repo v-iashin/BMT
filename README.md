@@ -119,7 +119,9 @@ Start by extracting audio and visual features from your video using [video_featu
 
 Extract I3D features
 ```bash
-# run this from the video_features folder: `cd ./submodules/video_features`
+# run this from the video_features folder:
+cd ./submodules/video_features
+conda deactivate
 conda activate i3d
 python main.py \
     --feature_type i3d \
@@ -132,7 +134,7 @@ python main.py \
 
 Extract VGGish features (if `ValueError`, download the vggish model first--see `README.md` in `./submodules/video_features`)
 ```bash
-# run this from the video_features folder: `cd ./submodules/video_features`
+conda deactivate
 conda activate vggish
 python main.py \
     --feature_type vggish \
@@ -144,7 +146,9 @@ python main.py \
 
 Run the inference
 ```bash
-# run this from the BMT main folder: `cd ../../`
+# run this from the BMT main folder:
+cd ../../
+conda deactivate
 conda activate bmt
 python ./sample/single_video_prediction.py \
     --prop_generator_model_path ./sample/best_prop_model.pt \
