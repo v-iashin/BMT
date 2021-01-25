@@ -1,6 +1,7 @@
 # checking if wget is installed on a computer
 if ! command -v wget &> /dev/null
 then
+    echo "wget: command not found"
     echo ""
     echo "wget command could not be found on your computer. Please, install it first."
     echo "If you cannot/dontwantto install wget, you may try to download the features manually."
