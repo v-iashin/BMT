@@ -1,3 +1,18 @@
+# checking if wget is installed on a computer
+if ! command -v wget &> /dev/null
+then
+    echo ""
+    echo "wget command could not be found on your computer. Please, install it first."
+    echo "If you cannot/dontwantto install wget, you may try to download the features manually."
+    echo "You may find the links and correct paths in this file."
+    echo "Make sure to check the md5 sums after manual download:"
+    echo "./data/i3d_25fps_stack64step64_2stream_npy.zip    d7266e440f8c616acbc0d8aaa4a336dc"
+    echo "./data/vggish_npy.zip    9a654ad785e801aceb70af2a5e1cffbe"
+    echo "./.vector_cache/glove.840B.300d.zip    2ffafcc9f9ae46fc8c95f32372976137"
+    exit
+fi
+
+
 echo "Downloading i3d features"
 cd data/
 wget https://a3s.fi/swift/v1/AUTH_a235c0f452d648828f745589cde1219a/bmt/i3d_25fps_stack64step64_2stream_npy.zip -q --show-progress
