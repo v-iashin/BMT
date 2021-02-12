@@ -33,6 +33,9 @@ Then, the input features are trimmed according to the proposed segments and enco
 <!-- <img src="https://github.com/v-iashin/v-iashin.github.io/raw/master/images/bmt/proposal_generator_compressed.svg" alt="Bi-Modal Transformer with Proposal Generator" height="400"> -->
 
 ## Getting Started
+
+_The code is tested on `Ubuntu 16.04/18.04` with one `NVIDIA GPU 1080Ti/2080Ti`. If you are planning to use it with other software/hardware, you might need to adapt `conda` environment files or even the code._
+
 Clone the repository. Mind the `--recursive` flag to make sure `submodules` are also cloned (evaluation scripts for Python 3 and scripts for feature extraction).
 ```bash
 git clone --recursive https://github.com/v-iashin/BMT.git
