@@ -209,3 +209,4 @@ Funding for this research was provided by the Academy of Finland projects 327910
 
 ## Media Coverage
 - [Dense Video Captioning Using Pytorch (Towards Data Science)](https://towardsdatascience.com/dense-video-captioning-using-pytorch-392ca0d6971a)
+- (in Russian) [Рубрика «Читаем статьи за вас». Сентябрь — октябрь 2020 года (habr.com)](https://habr.com/ru/company/ods/blog/544320/)
