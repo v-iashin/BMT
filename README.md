@@ -183,6 +183,15 @@ Note that in our research we avoided non-maximum suppression for computational e
 
 The sample video credits: [Women's long jump historical World record in 1978](https://www.youtube.com/watch?v=nynA-Gmh2r8)
 
+If you are having an error
+```
+RuntimeError: Vector for token b'<something>' has <some-number> dimensions, but previously read vectors
+have 300 dimensions.
+```
+try to remove `*.txt` and `*.txt.pt` from the hidden folder `./.vector_cache/` and check if you
+are not running out of disk space (unpacking of `glove.840B.300d.zip` requires extra ~8.5G).
+Then run `single_video_prediction.py` again.
+
 ## Citation
 Our paper was accepted at BMVC 2020. Please, use this bibtex if you would like to cite our work
 ```
