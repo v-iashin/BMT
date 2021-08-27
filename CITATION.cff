@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Iashin"
+  given-names: "Vladimir"
+- family-names: "Rahtu"
+  given-names: "Esa"
+title: "A Better Use of Audio-Visual Cues: Dense Video Captioning with Bi-modal Transformer"
+version: 2.0.4
+url: "https://v-iashin.github.io/bmt"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Iashin"
+    given-names: "Vladimir"
+  - family-names: "Rahtu"
+    given-names: "Esa"
+  journal: "British Machine Vision Conference"
+  title: "A Better Use of Audio-Visual Cues: Dense Video Captioning with Bi-modal Transformer"
+  year: 2020
