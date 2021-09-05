@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+import subprocess
 
 import numpy as np
 import torch
@@ -25,11 +26,11 @@ class Config(object):
         pass
 
 def load_features_from_npy(
-        feature_paths: Dict[str, str], start: float, end: float, duration: float, pad_idx: int, 
+        feature_paths: Dict[str, str], start: float, end: float, duration: float, pad_idx: int,
         device: int, get_full_feat=False, pad_feats_up_to: Dict[str, int] = None
     ) -> Dict[str, torch.Tensor]:
-    '''Loads the pre-extracted features from numpy files. 
-    This function is conceptually close to `datasets.load_feature.load_features_from_npy` but cleaned up 
+    '''Loads the pre-extracted features from numpy files.
+    This function is conceptually close to `datasets.load_feature.load_features_from_npy` but cleaned up
     for demonstration purpose.
 
     Args:
@@ -83,7 +84,7 @@ def load_prop_model(
     Args:
         device (int): GPU id.
         prop_generator_model_path (str): Path to the pre-trained proposal generation model.
-        pretrained_cap_model_path (str): Path to the pre-trained captioning module (prop generator uses the 
+        pretrained_cap_model_path (str): Path to the pre-trained captioning module (prop generator uses the
                                          encoder weights).
         max_prop_per_vid (int): Maximum number of proposals per video.
 
@@ -141,11 +142,11 @@ def load_cap_model(pretrained_cap_model_path: str, device: int) -> tuple:
     model.load_state_dict(cap_model_cpt['model_state_dict'])  # if IncompatibleKeys - ignore
     model.eval()
 
-    return cfg, model, train_dataset 
+    return cfg, model, train_dataset
 
 
 def generate_proposals(
-        prop_model: torch.nn.Module, feature_paths: Dict[str, str], pad_idx: int, cfg: Config, device: int, 
+        prop_model: torch.nn.Module, feature_paths: Dict[str, str], pad_idx: int, cfg: Config, device: int,
         duration_in_secs: float
     ) -> torch.Tensor:
     '''Generates proposals using the pre-trained proposal model.
@@ -164,7 +165,7 @@ def generate_proposals(
     '''
     # load features
     feature_stacks = load_features_from_npy(
-        feature_paths, None, None, duration_in_secs, pad_idx, device, get_full_feat=True, 
+        feature_paths, None, None, duration_in_secs, pad_idx, device, get_full_feat=True,
         pad_feats_up_to=cfg.pad_feats_up_to
     )
 
@@ -191,8 +192,8 @@ def generate_proposals(
     return predictions
 
 def caption_proposals(
-        cap_model: torch.nn.Module, feature_paths: Dict[str, str], 
-        train_dataset: torch.utils.data.dataset.Dataset, cfg: Config, device: int, proposals: torch.Tensor, 
+        cap_model: torch.nn.Module, feature_paths: Dict[str, str],
+        train_dataset: torch.utils.data.dataset.Dataset, cfg: Config, device: int, proposals: torch.Tensor,
         duration_in_secs: float
     ) -> List[Dict[str, Union[float, str]]]:
     '''Captions the proposals using the pre-trained model. You must specify the duration of the orignal video.
@@ -200,7 +201,7 @@ def caption_proposals(
     Args:
         cap_model (torch.nn.Module): pre-trained caption model. Use load_cap_model() functions to obtain it.
         feature_paths (Dict[str, str]): dict with paths to features ('audio', 'rgb' and 'flow').
-        train_dataset (torch.utils.data.dataset.Dataset): train dataset which is used as a vocab and for 
+        train_dataset (torch.utils.data.dataset.Dataset): train dataset which is used as a vocab and for
                                                           specfial tokens.
         cfg (Config): config object which was used to train caption model. pre-trained model checkpoint has it
         device (int): GPU id to calculate on.
@@ -223,7 +224,7 @@ def caption_proposals(
 
             # decode a caption for each segment one-by-one caption word
             ints_stack = greedy_decoder(
-                cap_model, feature_stacks, cfg.max_len, train_dataset.start_idx, train_dataset.end_idx, 
+                cap_model, feature_stacks, cfg.max_len, train_dataset.start_idx, train_dataset.end_idx,
                 train_dataset.pad_idx, cfg.modality
             )
             assert len(ints_stack) == 1, 'the func was cleaned to support only batch=1 (validation_1by1_loop)'
@@ -248,13 +249,32 @@ def caption_proposals(
 
             # add results to the list
             results.append({
-                'start': round(start.item(), 1), 
-                'end': round(end.item(), 1), 
+                'start': round(start.item(), 1),
+                'end': round(end.item(), 1),
                 'sentence': sentence
-            })        
+            })
 
     return results
 
+def which_ffprobe() -> str:
+    '''Determines the path to ffprobe library
+    Returns:
+        str -- path to the library
+    '''
+    result = subprocess.run(['which', 'ffprobe'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    ffprobe_path = result.stdout.decode('utf-8').replace('\n', '')
+    return ffprobe_path
+
+def get_video_duration(path):
+    '''Determines the duration of the custom video
+    Returns:
+        float -- duration of the video in seconds'''
+    cmd = f'{which_ffprobe()} -hide_banner -loglevel panic' \
+          f' -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 {path}'
+    result = subprocess.run(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    video_duration = float(result.stdout.decode('utf-8').replace('\n', ''))
+    print('Video Duration:', video_duration)
+    return video_duration
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='One video prediction')
