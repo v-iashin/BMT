@@ -24,7 +24,7 @@ cd ../
 echo "Downloading GloVe embeddings"
 mkdir .vector_cache
 cd .vector_cache
-wget https://a3s.fi/swift/v1/AUTH_a235c0f452d648828f745589cde1219a/bmt/glove.840B.300d.zip  -q --show-progress
+wget https://a3s.fi/swift/v1/AUTH_a235c0f452d648828f745589cde1219a/bmt/glove.840B.300d.zip -q --show-progress
 cd ../
 
 echo "Checking for correctness of the downloaded files"

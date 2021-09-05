@@ -7,6 +7,7 @@ authors:
   given-names: "Esa"
 title: "A Better Use of Audio-Visual Cues: Dense Video Captioning with Bi-modal Transformer"
 version: 2.0.4
+date-released: 2020-05-12
 url: "https://v-iashin.github.io/bmt"
 preferred-citation:
   type: article
