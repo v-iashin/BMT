@@ -4,8 +4,7 @@
 • [ArXiv](https://arxiv.org/abs/2005.08271)
 • [BMVC Page](https://www.bmvc2020-conference.com/conference/papers/paper_0111.html)
 • [Presentation](https://www.youtube.com/watch?v=C4zYVIqGDVQ) ([Can't watch YouTube? I gotchu!](https://a3s.fi/swift/v1/AUTH_a235c0f452d648828f745589cde1219a/bmt/video_0111.mp4) 🤗)
-• [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/v-iashin/BMT/blob/master/colab_demo_BMT.ipynb)
-
+•
 
 This is a PyTorch implementation for our paper: A Better Use of Audio-Visual Cues: Dense Video Captioning with Bi-modal Transformer ([BMVC](https://bmvc2020.github.io/) 2020).
 
@@ -120,7 +119,10 @@ Comparison between [MDVC](https://arxiv.org/abs/2003.07758) and Bi-modal Transfo
 
 ## Single Video Prediction
 
-*Disclaimer: we do not guarantee perfect results nor recommend you to use it in production. Sometimes captions are redundant, unnatural, and rediculous. Use it at your own risk.*
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/v-iashin/BMT/blob/master/colab_demo_BMT.ipynb) 
+
+*The experience with Colab is not particularly smooth. 
+Thus, we recommend setting up the environment locally.*
 
 Start by extracting audio and visual features from your video using [video_features](https://github.com/v-iashin/video_features/tree/4fa02bd5c5b8c34081dcfb609e2bcd5a973eaab2) repository. This repo is also included in `./submodules/video_features` (commit `4fa02bd5c5b8c34081dcfb609e2bcd5a973eaab2`).
 
