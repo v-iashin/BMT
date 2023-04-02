@@ -119,10 +119,11 @@ Comparison between [MDVC](https://arxiv.org/abs/2003.07758) and Bi-modal Transfo
 
 ## Single Video Prediction
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/v-iashin/BMT/blob/master/colab_demo_BMT.ipynb) 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/v-iashin/BMT/blob/master/colab_demo_BMT.ipynb)
 
-*The experience with Colab is not particularly smooth. 
-Thus, we recommend setting up the environment locally.*
+Currently, Google Colab does not work due to the change in Colab's environment.
+See [Issue#49](https://github.com/v-iashin/BMT/issues/49) -- any help there is highly appreciated.
+Thus, I recommend setting up the environment locally as outlined below.
 
 Start by extracting audio and visual features from your video using [video_features](https://github.com/v-iashin/video_features/tree/4fa02bd5c5b8c34081dcfb609e2bcd5a973eaab2) repository. This repo is also included in `./submodules/video_features` (commit `4fa02bd5c5b8c34081dcfb609e2bcd5a973eaab2`).
 
