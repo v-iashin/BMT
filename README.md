@@ -100,7 +100,7 @@ python main.py \
 
 
 ## Details on Feature Extraction
-Check out our script for extraction of I3D and VGGish features from a set of videos: [video_features on GitHub](https://github.com/v-iashin/video_features/tree/4fa02bd5c5b8c34081dcfb609e2bcd5a973eaab2) (make sure to checkout to `4fa02bd5c5b8c34081dcfb609e2bcd5a973eaab2` commit). Also see [#7](https://github.com/v-iashin/MDVC/issues/7) for more details on configuration.
+Check out our script for extraction of I3D and VGGish features from a set of videos: [video_features on GitHub](https://github.com/v-iashin/video_features/tree/8e551f552f915e21e3ecaaf04a15545081646db5) (make sure to checkout to `8e551f552f915e21e3ecaaf04a15545081646db5` commit). Also see [#7](https://github.com/v-iashin/MDVC/issues/7) for more details on configuration.
 
 
 ## Reproducibility Note
@@ -125,7 +125,7 @@ Currently, Google Colab does not work due to the change in Colab's environment.
 See [Issue#49](https://github.com/v-iashin/BMT/issues/49) -- any help there is highly appreciated.
 Thus, I recommend setting up the environment locally as outlined below.
 
-Start by extracting audio and visual features from your video using [video_features](https://github.com/v-iashin/video_features/tree/4fa02bd5c5b8c34081dcfb609e2bcd5a973eaab2) repository. This repo is also included in `./submodules/video_features` (commit `4fa02bd5c5b8c34081dcfb609e2bcd5a973eaab2`).
+Start by extracting audio and visual features from your video using [video_features](https://github.com/v-iashin/video_features/tree/8e551f552f915e21e3ecaaf04a15545081646db5) repository. This repo is also included in `./submodules/video_features` (commit `8e551f552f915e21e3ecaaf04a15545081646db5`).
 
 Extract I3D features
 ```bash
