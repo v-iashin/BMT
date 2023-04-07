@@ -54,7 +54,7 @@ dependencies:
   - python=3.7.7=hcf32534_0_cpython
   - python-dateutil=2.8.1=py_0
   - python_abi=3.7=1_cp37m
-  - pytorch=1.2.0=py3.7_cuda10.0.130_cudnn7.6.2_0
+  - pytorch=1.2.0=cuda100py37h938c94c_0
   - pytz=2020.1=py_0
   - readline=8.0=h7b6447c_0
   - regex=2018.07.11=py37h14c3975_0
