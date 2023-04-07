@@ -78,7 +78,6 @@ dependencies:
   - wrapt=1.10.11=py37h14c3975_2
   - xz=5.2.5=h7b6447c_0
   - zlib=1.2.11=h7b6447c_3
-  - torchvision=0.4.0=cuda100py37hecfc37a_0
   - pip:
     - torchtext==0.3.1
 
