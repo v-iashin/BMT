@@ -121,9 +121,7 @@ Comparison between [MDVC](https://arxiv.org/abs/2003.07758) and Bi-modal Transfo
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/v-iashin/BMT/blob/master/colab_demo_BMT.ipynb)
 
-Currently, Google Colab does not work due to the change in Colab's environment.
-See [Issue#49](https://github.com/v-iashin/BMT/issues/49) -- any help there is highly appreciated.
-Thus, I recommend setting up the environment locally as outlined below.
+_The experience with Google Colab is pretty poor. To ensure a more optimal experience, we recommend following the installation guide and setting up the software locally as described below._
 
 Start by extracting audio and visual features from your video using [video_features](https://github.com/v-iashin/video_features/tree/662ec51caf591e76724237f0454bdf7735a8dcb1) repository. This repo is also included in `./submodules/video_features` (commit `662ec51caf591e76724237f0454bdf7735a8dcb1`).
 
